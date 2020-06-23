@@ -4,7 +4,7 @@ export interface IImageVariant extends Document {
   path: string;
   width?: string;
   height?: string;
-  fit?: string; // TODO enum
+  fit?: 'cover' | 'contain' | 'fill' | 'inside' | 'outside'; // TODO enum
   quality?: string;
   format?: string // TODO enumm
 }

@@ -5,10 +5,6 @@ import { GraphQLSchema, GraphQLObjectType, GraphQLString, GraphQLList, GraphQLIn
 import bodyParser from "body-parser";
 import fileUpload from "express-fileupload";
 
-import userModels from './models/user.models';
-import userController from './controllers/user.controller';
-import petModels from './models/pet.models';
-import petController from './controllers/pet.controller';
 import { GetImage } from './controllers/public/image.controller';
 import { UploadImage, RemoveImage } from './controllers/api/image.controller';
 import ImageType from './grapql/types/image.type';

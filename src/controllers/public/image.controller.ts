@@ -6,6 +6,7 @@ import sharp from "sharp";
 import Image from "../../models/image.model";
 import { IImageVariant } from "../../models/image-variant.model";
 import { CreateImageVariant } from "./image-variant.controller";
+import { generate, IVariantHashV1 } from "../../tools/variant-hash.tool";
 
 interface IImageVariantInput {
   width?: IImageVariant['width'],
@@ -30,7 +31,11 @@ export async function GetImage(req: Request, res: Response) {
   const { width, height, fit, quality, format }: IImageVariantInput = req.query;
 
   if (width || height || fit || quality || format) {
-    console.log(width);
+
+    const generateOptions: IVariantHashV1 = { version: '1', width, height, fit, quality, format, center: 'asd' };
+
+    const hash = generate(generateOptions)
+    console.log(hash);
 
     const variant = image.variants.find((variant) => variant.height == height && variant.width == width);
 
