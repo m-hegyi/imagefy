@@ -2,6 +2,7 @@ import mongoose, { Schema, Document } from "mongoose";
 
 export interface IImageVariant extends Document {
   path: string;
+  hash: string;
   width?: string;
   height?: string;
   fit?: 'cover' | 'contain' | 'fill' | 'inside' | 'outside'; // TODO enum
@@ -11,6 +12,7 @@ export interface IImageVariant extends Document {
 
 export const ImageVariantScheme = new Schema({
   path: { type: String, required: true },
+  hash: { type: String, required: true },
   width: Number,
   height: Number,
   fit: String,

@@ -17,11 +17,10 @@ interface IImageVariantInput {
 }
 
 export async function GetImage(req: Request, res: Response) {
+  const start = new Date().getTime();
   const { id } = req.params;
 
   const image = await Image.findById(id).exec();
-
-  console.log(image);
 
   if (!image) {
     res.send('Fail');
@@ -32,17 +31,17 @@ export async function GetImage(req: Request, res: Response) {
 
   if (width || height || fit || quality || format) {
 
-    const generateOptions: IVariantHashV1 = { version: '1', width, height, fit, quality, format, center: 'asd' };
+    const generateOptions: IVariantHashV1 = { version: '1', width, height, fit, quality, format };
 
-    const hash = generate(generateOptions)
-    console.log(hash);
+    const hash = generate(generateOptions);
 
-    const variant = image.variants.find((variant) => variant.height == height && variant.width == width);
+    const variant = image.variants.find((variant) => variant.hash === hash);
 
     if (variant) {
       const img = fs.readFileSync(variant.path, 'binary');
       res.setHeader('Content-Type', image.mimeType);
       res.end(img, 'binary');
+
       return;
     } else {
       const options = {
@@ -59,7 +58,7 @@ export async function GetImage(req: Request, res: Response) {
 
       const path = `./static/generateds/${_id}`;
 
-      await CreateImageVariant({ imageId: id, variantId: _id, path, width, height, fit, quality, format });
+      await CreateImageVariant({ imageId: id, variantId: _id, path, hash, width, height, fit, quality, format });
 
       fs.writeFileSync(path, newImg);
       res.setHeader('Content-Type', image.mimeType);

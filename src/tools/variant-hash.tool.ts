@@ -10,7 +10,6 @@ interface IVariantHash {
 };
 
 export interface IVariantHashV1 extends IVariantHash {
-  center: string;
 };
 
 
@@ -20,11 +19,11 @@ export const generate = <T extends IVariantHash>(variantOptions: T): string => {
   const { version, width, height, fit, quality, format, ...rest } = variantOptions;
 
   // hash -> version | width | height | fit | quailty | format | others
-  hash += parseInt(version, 10).toString(36).padStart(4, '0');
+  hash += parseInt(version, 10).toString(36).padStart(2, '0');
   hash += width ? parseInt(width, 10).toString(36).padStart(8, '0') : '00000000';
   hash += height ? parseInt(height, 10).toString(36).padStart(8, '0') : '0000000';
-  hash += fit ? parseInt(fit, 10).toString(36).padStart(8, '0') : '0000';
-  hash += format ? parseInt(format, 10).toString(36).padStart(8, '0') : '0000';
+  hash += fit ? parseInt(fit, 10).toString(36).padStart(2, '0') : '00';
+  hash += format ? parseInt(format, 10).toString(36).padStart(2, '0') : '00';
 
   return hash;
 };
