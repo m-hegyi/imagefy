@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document, Mongoose } from "mongoose";
+import mongoose, { Schema, Document } from "mongoose";
 import { IImageVariant, ImageVariantScheme } from "./image-variant.model";
 
 export interface IImage extends Document {

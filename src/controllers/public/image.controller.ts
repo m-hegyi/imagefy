@@ -17,7 +17,6 @@ interface IImageVariantInput {
 }
 
 export async function GetImage(req: Request, res: Response) {
-  const start = new Date().getTime();
   const { id } = req.params;
 
   const image = await Image.findById(id).exec();
