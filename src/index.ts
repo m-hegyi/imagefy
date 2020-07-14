@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import connect from './connect';
 import expressGraphQL from 'express-graphql';
 import { GraphQLSchema, GraphQLObjectType, GraphQLString, GraphQLList, GraphQLInt, GraphQLNonNull, GraphQLID } from 'graphql';
@@ -52,6 +52,10 @@ app.post('/api/upload-image', UploadImage);
 
 app.delete('/api/images/:id', RemoveImage);
 
+app.get('*', (req: Request, res: Response) => {
+  res.status(404);
+  res.send('ASd');
+})
 
 app.listen(PORT, () => {
   console.log(`Server is running on port: ${PORT}`);

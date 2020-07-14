@@ -1,4 +1,4 @@
-import { Request, Response } from  "express";
+import { Request, Response, NextFunction } from  "express";
 import fs from "fs";
 import mongoose from "mongoose";
 import sharp from "sharp";
@@ -16,13 +16,13 @@ interface IImageVariantInput {
   format?: IImageVariant['format']
 }
 
-export async function GetImage(req: Request, res: Response) {
+export async function GetImage(req: Request, res: Response, next: NextFunction) {
   const { id } = req.params;
 
   const image = await Image.findById(id).exec();
 
   if (!image) {
-    res.send('Fail');
+    next();
     return;
   }
 

@@ -8,6 +8,7 @@ export interface IImageVariant extends Document {
   fit?: 'cover' | 'contain' | 'fill' | 'inside' | 'outside'; // TODO enum
   quality?: string;
   format?: string // TODO enumm
+  mimeType?: string; // TODO enum
 }
 
 export const ImageVariantScheme = new Schema({

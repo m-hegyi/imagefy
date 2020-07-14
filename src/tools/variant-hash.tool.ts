@@ -7,6 +7,7 @@ interface IVariantHash {
   fit?: IImageVariant['fit'];
   quality?: IImageVariant['quality'];
   format?: IImageVariant['format'];
+  mimeType?: IImageVariant['mimeType'];
 };
 
 export interface IVariantHashV1 extends IVariantHash {
